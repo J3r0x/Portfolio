@@ -9,7 +9,7 @@ export const projects = [
     image: portfolioImage,
     technologies: ["React", "Vite", "Tailwind CSS", "Lucide React", "JavaScript"],
     github: "https://github.com/J3r0x/Portfolio",
-    demo: null,
+    demo: "https://portfolio-nine-ochre-17.vercel.app/",
     featured: true,
     stars: null
   },
@@ -19,7 +19,7 @@ export const projects = [
     description: "Discord bot for music playback with custom commands, advanced playback queues, and integration with multiple streaming platforms. Includes features like skip, pause, resume, queue management, and music moderation commands.",
     image: discordBotImage,
     technologies: ["Node.js", "Discord.js", "JavaScript", "FFmpeg", "YouTube API"],
-    github: "https://github.com/J3r0x/discord-music-bot",
+    github: "https://github.com/J3r0x/DiscordBot",
     demo: null,
     featured: true,
     stars: null

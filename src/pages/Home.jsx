@@ -36,7 +36,7 @@ export const Home = () => {
                                     Software Developer
                                 </h2>
                                 <p className="mt-6 max-w-md leading-relaxed text-slate-600 dark:text-slate-300 text-base lg:text-lg">
-                                    Specialized in developing Minecraft addons with the Scripting API and creating modern web experiences with frontend technologies.
+                                    Software Engineering student passionate about building interactive web applications, custom tools, and digital experiences using modern technologies.
                                 </p>
                             </div>
                             
@@ -63,10 +63,7 @@ export const Home = () => {
                             </div>
                             <div className="space-y-4 text-slate-700 dark:text-slate-300">
                                     <p className="leading-relaxed">
-                                        I'm a developer specialized in creating Minecraft addons using the 
-                                        <span className="font-medium text-[#E91E63]"> Minecraft Scripting API</span>, where I develop 
-                                        custom game mechanics, advanced command systems, and features that enhance 
-                                        the gaming experience.
+                                        Hi! I'm a software engineering student who loves turning ideas into real projects. I enjoy building web apps, experimenting with new technologies, and creating digital tools that make life easier or more fun. I'm always curious and looking for ways to learn and grow as a developer.
                                     </p>
                                     <p className="leading-relaxed">
                                         I'm also passionate about frontend development, creating modern interfaces with{" "}
