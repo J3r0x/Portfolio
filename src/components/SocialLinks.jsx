@@ -10,13 +10,13 @@ export const SocialLinks = () => {
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/tu-perfil", // Update with your real LinkedIn
+      url: "https://www.linkedin.com/in/isaac-rivera-037bb1223/", // Update with your real LinkedIn
       icon: Linkedin,
       ariaLabel: "LinkedIn (opens in a new tab)"
     },
     {
       name: "Email",
-      url: "mailto:tu-email@example.com", // Update with your real email
+      url: "mailto:jer0xrv@gmail.com", // Update with your real email
       icon: Mail,
       ariaLabel: "Email"
     }
