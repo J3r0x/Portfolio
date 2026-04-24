@@ -2,51 +2,55 @@ import { ExternalLink } from "lucide-react";
 
 export const ExperienceCard = ({ experience }) => {
   return (
-    <li className="mb-8">
-      <div className="group relative grid pb-1 transition-all duration-500 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-        <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-xl transition-all duration-500 motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-gradient-to-r lg:group-hover:from-pink-500/10 lg:group-hover:to-purple-500/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(233,30,99,0.1)] lg:group-hover:drop-shadow-lg lg:group-hover:backdrop-blur-sm"></div>
-        
+    <div className="flex gap-8 p-8 bg-[#111] border border-white/5 border-l-2 border-l-pink-500 hover:border-l-pink-400 hover:border-white/10 transition-all duration-300 group">
+
         {/* Period */}
-        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 sm:col-span-2">
-          {experience.period}
-        </header>
-        
+        <div className="hidden sm:block shrink-0 w-28 pt-0.5">
+          <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+            {experience.period}
+          </span>
+          {experience.current && (
+            <span className="mt-2 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
+              <span className="text-xs font-mono text-pink-400">current</span>
+            </span>
+          )}
+        </div>
+
         {/* Content */}
-        <div className="z-10 sm:col-span-6">
-          <h3 className="font-medium leading-snug text-slate-800 dark:text-white">
-            <div>
-              <a
-                className="inline-flex items-baseline font-medium leading-tight text-slate-800 hover:text-[#E91E63] dark:text-white dark:hover:text-[#E91E63] focus-visible:text-[#E91E63] group/link text-base transition-colors duration-300"
-                href={experience.companyUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${experience.title} at ${experience.company} (opens in a new tab)`}
-              >
-                <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
-                <span>
-                  {experience.title} · {experience.company}
-                  {experience.companyUrl !== "#" && (
-                    <ExternalLink className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" />
-                  )}
-                </span>
-              </a>
-            </div>
-          </h3>
-          
-          <p className="mt-2 text-sm leading-normal text-slate-600 dark:text-slate-300">{experience.description}</p>
-          
+        <div className="flex-1 space-y-3">
+          <div>
+            <a
+              className="inline-flex items-center gap-1.5 font-bold text-white text-lg hover:text-pink-400 transition-colors duration-200 font-sans"
+              href={experience.companyUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {experience.title}
+              <span className="text-gray-500 font-normal">·</span>
+              <span className="text-pink-400">{experience.company}</span>
+              {experience.companyUrl !== "#" && (
+                <ExternalLink className="h-3.5 w-3.5 text-gray-500 group-hover:text-pink-400 transition-colors" />
+              )}
+            </a>
+            {/* Mobile period */}
+            <p className="sm:hidden text-xs font-mono text-gray-500 mt-1">{experience.period}</p>
+          </div>
+
+          <p className="text-base leading-relaxed text-gray-400 font-sans">{experience.description}</p>
+
           {/* Technologies */}
-          <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
+          <div className="flex flex-wrap gap-1.5 pt-1" aria-label="Technologies used">
             {experience.technologies.map((tech, index) => (
-              <li key={index} className="mr-1.5 mt-2">
-                <div className="flex items-center rounded-full bg-[#E91E63]/10 border border-[#E91E63]/20 dark:bg-slate-700/50 dark:border-slate-600 px-3 py-1 text-xs font-medium leading-5 text-[#E91E63] dark:text-[#E91E63] hover:bg-[#E91E63]/20 dark:hover:bg-slate-600/50 transition-all duration-300">
-                  {tech}
-                </div>
-              </li>
+              <span
+                key={index}
+                className="px-2 py-0.5 bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-mono"
+              >
+                {tech}
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
-    </li>
   );
 };

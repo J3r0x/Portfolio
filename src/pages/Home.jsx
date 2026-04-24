@@ -1,192 +1,242 @@
 import { Navigation } from "../components/Navigation"
-import { SocialLinks } from "../components/SocialLinks"
 import { ExperienceCard } from "../components/ExperienceCard"
 import { ProjectCard } from "../components/ProjectCard"
 import { SkillsSection } from "../components/SkillsSection"
+import { FadeIn } from "../components/FadeIn"
+import { useInView } from "../hooks/useInView"
 import { projects, experience, skills } from "../data/projects"
 
+const EASE = 'cubic-bezier(0.16,1,0.3,1)';
+
+const Tag = ({ name, closing = false }) => (
+  <span className="text-pink-400 font-mono text-sm select-none">
+    {closing ? `</${name}>` : `<${name}>`}
+  </span>
+);
+
+const SectionLabel = ({ tag }) => {
+  const [ref, inView] = useInView(0.1);
+  return (
+    <div ref={ref} className="mb-14">
+      {/* Tag wipes in from left */}
+      <div style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'none' : 'translateX(-16px) skewX(-2deg)',
+        transition: `opacity 600ms ${EASE}, transform 800ms ${EASE}`,
+      }}>
+        <Tag name={tag} />
+      </div>
+      {/* Line draws right */}
+      <div className="mt-3 h-px bg-gradient-to-r from-pink-500/60 to-pink-500/10" style={{
+        width: inView ? '5rem' : '0',
+        opacity: inView ? 1 : 0,
+        transition: `width 900ms ${EASE} 150ms, opacity 500ms ease 150ms`,
+      }} />
+    </div>
+  );
+};
+
 export const Home = () => {
-    return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 text-slate-800 dark:text-white relative">
-            <div className="fixed inset-0 pointer-events-none hidden dark:block">
-                <div className="absolute top-10 left-10 w-1 h-1 bg-blue-300 rounded-full animate-pulse"></div>
-                <div className="absolute top-20 right-32 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                <div className="absolute top-40 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                <div className="absolute top-60 right-1/4 w-1 h-1 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
-                <div className="absolute top-80 left-1/3 w-1 h-1 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-                <div className="absolute bottom-40 right-20 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '2.5s'}}></div>
-                <div className="absolute bottom-60 left-20 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '3s'}}></div>
-                <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '3.5s'}}></div>
-                <div className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '4s'}}></div>
-                <div className="absolute top-1/2 left-10 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '4.5s'}}></div>
-                <div className="absolute top-32 left-2/3 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '5s'}}></div>
-                <div className="absolute bottom-20 right-1/2 w-1 h-1 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '5.5s'}}></div>
-            </div>
-            
-            {/* Main Container*/}
-            <div className="mx-auto min-h-screen max-w-7xl font-sans lg:flex">
-                {/* Left Side */}
-                <header className="lg:fixed lg:top-0 lg:left-1/2 lg:transform lg:-translate-x-full lg:h-screen lg:w-1/2 lg:max-w-lg lg:flex lg:flex-col lg:justify-between lg:py-16 lg:px-8 xl:px-16 2xl:px-20 px-4 py-8 md:px-8 md:py-16">
-                        <div>
-                            <div className="floating">
-                                <h1 className="text-4xl font-bold tracking-tight text-[#E91E63] dark:text-white sm:text-5xl lg:text-6xl mb-4">
-                                    Isaac Rivera
-                                </h1>
-                                <h2 className="mt-6 text-lg font-medium tracking-tight text-[#E91E63] dark:text-[#E91E63] sm:text-xl lg:text-2xl">
-                                    Software Developer
-                                </h2>
-                                <p className="mt-6 max-w-md leading-relaxed text-slate-600 dark:text-slate-300 text-base lg:text-lg">
-                                    Software Engineering student passionate about building interactive web applications, custom tools, and digital experiences using modern technologies.
-                                </p>
-                            </div>
-                            
-                            {/* Navigation Component */}
-                            <div className="mt-10">
-                                <Navigation />
-                            </div>
-                        </div>
-                        
-                        {/* Social Links Component */}
-                        <div className="mt-12 lg:mt-auto">
-                            <SocialLinks />
-                        </div>
-                    </header>
-                    
-                {/* Right Side - Main Content */}
-                <main className="lg:ml-auto lg:w-1/2 lg:max-w-3xl pt-16 lg:py-16 px-4 md:px-8 lg:px-8 xl:px-16 2xl:px-20">
-                        {/* About Section */}
-                        <section id="about" className="mb-16 scroll-mt-16 md:mb-20 lg:mb-24 lg:scroll-mt-20">
-                            <div className="mb-6">
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-[#E91E63] dark:text-[#E91E63]">
-                                    About Me
-                                </h2>
-                            </div>
-                            <div className="space-y-4 text-slate-700 dark:text-slate-300">
-                                    <p className="leading-relaxed">
-                                        Hi! I'm a software engineering student who loves turning ideas into real projects. I enjoy building web apps, experimenting with new technologies, and creating digital tools that make life easier or more fun. I'm always curious and looking for ways to learn and grow as a developer.
-                                    </p>
-                                    <p className="leading-relaxed">
-                                        I'm also passionate about frontend development, creating modern interfaces with{" "}
-                                        <span className="font-medium text-[#E91E63]">
-                                            React, JavaScript, and TypeScript
-                                        </span>
-                                        . I focus on creating intuitive user experiences and clean, maintainable code.
-                                    </p>
-                                <p className="leading-relaxed">
-                                    In my free time, I contribute to open source projects and explore new technologies 
-                                    in web development and gaming.
-                                </p>
-                            </div>
-                        </section>
-                        
-                        {/* Skills Section */}
-                        <section id="skills" className="mb-16 scroll-mt-16 md:mb-20 lg:mb-24 lg:scroll-mt-20">
-                            <div className="bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-blue-900/90 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#E91E63]/10 via-transparent to-blue-500/10"></div>
-                                <div className="relative z-10">
-                                    <div className="mb-6">
-                                        <h2 className="text-sm font-bold uppercase tracking-widest text-[#E91E63] dark:text-[#E91E63]">
-                                            Technical Skills
-                                        </h2>
-                                    </div>
-                                    <SkillsSection skills={skills} />
-                                </div>
-                            </div>
-                        </section>
-                        
-                        {/* Experience Section */}
-                        <section id="experience" className="mb-16 scroll-mt-16 md:mb-20 lg:mb-24 lg:scroll-mt-20">
-                            <div className="mb-4">
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-[#E91E63] dark:text-[#E91E63] lg:sr-only">
-                                    Experience
-                                </h2>
-                            </div>
-                            <div>
-                                <ol className="group/list">
-                                    {experience.map((exp) => (
-                                        <ExperienceCard key={exp.id} experience={exp} />
-                                    ))}
-                                </ol>
-                                <div className="mt-8">
-                                    <a
-                                        className="inline-flex items-center font-medium leading-tight text-[#E91E63] dark:text-[#E91E63] group"
-                                        aria-label="View Full Résumé (opens in a new tab)"
-                                        href="/resume.pdf"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        <span>
-                                            <span className="border-b border-transparent pb-px transition group-hover:border-pink-400 motion-reduce:transition-none">
-                                                View Full Resume
-                                            </span>
-                                            <span className="whitespace-nowrap">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                    className="ml-1 inline-block h-4 w-4 shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-focus-visible:-translate-y-1 group-focus-visible:translate-x-1 motion-reduce:transition-none"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                                                        clipRule="evenodd"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        
-                        {/* Projects Section */}
-                        <section id="projects" className="mb-16 scroll-mt-16 md:mb-20 lg:mb-24 lg:scroll-mt-20">
-                            <div className="mb-4">
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-[#E91E63] dark:text-[#E91E63] lg:sr-only">
-                                    Projects
-                                </h2>
-                            </div>
-                            <div>
-                                <ol className="group/list">
-                                    {projects.map((project) => (
-                                        <ProjectCard key={project.id} project={project} />
-                                    ))}
-                                </ol>
-                                <div className="mt-8">
-                                    <a
-                                        className="inline-flex items-center font-medium leading-tight text-[#E91E63] dark:text-[#E91E63] group"
-                                        aria-label="View Full Project Archive (opens in a new tab)"
-                                        href="https://github.com/J3r0x"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        <span>
-                                            <span className="border-b border-transparent pb-px transition group-hover:border-pink-400 motion-reduce:transition-none">
-                                                View Full Project Archive
-                                            </span>
-                                            <span className="whitespace-nowrap">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                    className="ml-1 inline-block h-4 w-4 shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-focus-visible:-translate-y-1 group-focus-visible:translate-x-1 motion-reduce:transition-none"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                                                        clipRule="evenodd"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                    </main>
-            </div>
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+
+      {/* ── Background Decoration ───────────────────────── */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="dot-grid absolute inset-0 opacity-[0.15]" />
+        {/* Orbs */}
+        <div className="orb-a absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-pink-600/20 blur-[120px]" />
+        <div className="orb-b absolute top-[40%] -left-60 w-[500px] h-[500px] rounded-full bg-pink-500/10 blur-[110px]" />
+        <div className="orb-c absolute bottom-[15%] right-[5%] w-[380px] h-[380px] rounded-full bg-pink-800/15 blur-[100px]" />
+
+        {/* ── Geometric shapes ── */}
+
+        {/* Rotating double-rect — top left */}
+        <svg className="shape-spin-slow absolute top-[12%] left-[3%] opacity-[0.07]" width="180" height="180" viewBox="-90 -90 180 180" fill="none">
+          <rect x="-78" y="-78" width="156" height="156" stroke="#ec4899" strokeWidth="1" rx="2"/>
+          <rect x="-52" y="-52" width="104" height="104" stroke="#ec4899" strokeWidth="0.5" rx="1"/>
+          <line x1="-78" y1="0" x2="78" y2="0" stroke="#ec4899" strokeWidth="0.3" />
+          <line x1="0" y1="-78" x2="0" y2="78" stroke="#ec4899" strokeWidth="0.3" />
+        </svg>
+
+        {/* Counter-rotating triangle — right mid */}
+        <svg className="shape-spin-rev absolute top-[44%] right-[3%] opacity-[0.055]" width="130" height="130" viewBox="-65 -65 130 130" fill="none">
+          <polygon points="0,-58 50,29 -50,29" stroke="#ec4899" strokeWidth="1" />
+          <polygon points="0,-34 30,17 -30,17" stroke="#ec4899" strokeWidth="0.5" />
+        </svg>
+
+        {/* Floating diamond — bottom left */}
+        <svg className="shape-float absolute bottom-[20%] left-[8%] opacity-[0.06]" style={{"--r":"0deg"}} width="80" height="80" viewBox="-40 -40 80 80" fill="none">
+          <rect x="-30" y="-30" width="60" height="60" stroke="#ec4899" strokeWidth="1" transform="rotate(45)" />
+          <rect x="-16" y="-16" width="32" height="32" stroke="#ec4899" strokeWidth="0.5" transform="rotate(45)" />
+        </svg>
+
+        {/* Floating concentric circles — center */}
+        <svg className="shape-float-b absolute top-[68%] left-[36%] opacity-[0.04]" style={{"--r":"0deg"}} width="64" height="64" viewBox="-32 -32 64 64" fill="none">
+          <circle cx="0" cy="0" r="30" stroke="#ec4899" strokeWidth="1" />
+          <circle cx="0" cy="0" r="20" stroke="#ec4899" strokeWidth="0.6" />
+          <circle cx="0" cy="0" r="10" stroke="#ec4899" strokeWidth="0.4" />
+        </svg>
+
+        {/* Dashed marching hexagon outline — top right area */}
+        <svg className="shape-float absolute top-[28%] left-[50%] opacity-[0.035]" style={{"--r":"0deg"}} width="60" height="60" viewBox="-30 -30 60 60" fill="none">
+          <polygon points="0,-26 22.5,-13 22.5,13 0,26 -22.5,13 -22.5,-13" stroke="#ec4899" strokeWidth="1" className="shape-dash-march" />
+        </svg>
+
+        {/* Small cross/plus — scattered */}
+        <svg className="absolute top-[82%] right-[18%] opacity-[0.05]" width="28" height="28" viewBox="-14 -14 28 28" fill="none">
+          <line x1="-12" y1="0" x2="12" y2="0" stroke="#ec4899" strokeWidth="1" />
+          <line x1="0" y1="-12" x2="0" y2="12" stroke="#ec4899" strokeWidth="1" />
+        </svg>
+        <svg className="absolute top-[35%] left-[22%] opacity-[0.04]" width="20" height="20" viewBox="-10 -10 20 20" fill="none">
+          <line x1="-8" y1="0" x2="8" y2="0" stroke="#ec4899" strokeWidth="1" />
+          <line x1="0" y1="-8" x2="0" y2="8" stroke="#ec4899" strokeWidth="1" />
+        </svg>
+      </div>
+
+      <Navigation />
+
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section
+        id="home"
+        className="relative min-h-screen flex items-center px-4 sm:px-8 md:px-20 max-w-7xl mx-auto py-28 lg:py-0"
+      >
+        {/* Vertical accent line */}
+        <div className="absolute left-0 top-[28%] h-[44%] w-px bg-gradient-to-b from-transparent via-pink-500/30 to-transparent hidden lg:block" />
+        {/* Corner bracket decoration */}
+        <div className="absolute bottom-12 right-0 hidden lg:block opacity-20">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M40 0 L40 40 L0 40" stroke="#ec4899" strokeWidth="1"/>
+          </svg>
         </div>
-    )
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-30">
+          <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-gray-500">scroll</span>
+          <div className="w-px h-10 bg-gradient-to-b from-pink-500/60 to-transparent animate-pulse" />
+        </div>
+
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+
+          {/* Left — name block */}
+          <FadeIn direction="up" delay={0}>
+            <div className="relative">
+              {/* Open to work badge */}
+              <div className="mb-6 flex items-center gap-3">
+                <Tag name="developer" />
+                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-emerald-400/80 border border-emerald-500/20 bg-emerald-500/5 px-2.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  open to work
+                </span>
+              </div>
+
+              <h1 className="relative text-5xl sm:text-7xl md:text-[7rem] lg:text-[9rem] font-bold text-white leading-none tracking-tight pl-2">
+                Isaac
+              </h1>
+
+              {/* Role line */}
+              <div className="mt-5 pl-2 flex items-center gap-3">
+                <div className="h-px w-8 bg-pink-500/50" />
+                <span className="text-xs font-mono text-gray-500 uppercase tracking-[0.18em]">Software Developer</span>
+              </div>
+
+              <div className="mt-8 text-right">
+                <Tag name="developer" closing />
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Right — about block */}
+          <FadeIn direction="up" delay={180}>
+            <div>
+              <div className="mb-6">
+                <Tag name="about-me" />
+              </div>
+              <div className="space-y-5 pl-2">
+                <p className="text-xs font-mono text-pink-500/70 uppercase tracking-[0.2em]">
+                  Software Developer &amp; Student
+                </p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug">
+                  <span className="text-pink-400">Hey,</span> I build things for the web.
+                </h2>
+                <p className="text-gray-400 leading-relaxed text-base md:text-lg">
+                  I&apos;m a software engineering student who enjoys turning ideas into
+                  real products. I&apos;ve worked on full-stack apps, desktop tools, and
+                  everything in between, always looking for ways to make software feel
+                  both functional and polished.
+                </p>
+                <p className="text-gray-500 leading-relaxed text-base">
+                  When I&apos;m not coding I&apos;m probably breaking something and figuring
+                  out why.
+                </p>
+              </div>
+              <div className="mt-6 text-right">
+                <Tag name="about-me" closing />
+              </div>
+            </div>
+          </FadeIn>
+
+        </div>
+      </section>
+
+      {/* ── Technologies ─────────────────────────────────── */}
+      <section id="skills" className="relative py-16 md:py-20 px-4 sm:px-8 md:px-20 max-w-7xl mx-auto border-t border-white/5">
+        <SectionLabel tag="technologies" />
+        <FadeIn direction="up" delay={100}>
+          <SkillsSection skills={skills} />
+        </FadeIn>
+        <FadeIn direction="none" delay={50}>
+          <div className="mt-10 text-right">
+            <Tag name="technologies" closing />
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ── Projects ─────────────────────────────────────── */}
+      <section id="projects" className="relative py-16 md:py-20 px-4 sm:px-8 md:px-20 max-w-7xl mx-auto border-t border-white/5">
+        <SectionLabel tag="projects" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map((project, i) => {
+            const colSpans = ['sm:col-span-2 lg:col-span-2', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-2 lg:col-span-2', 'sm:col-span-2 lg:col-span-3'];
+            const colSpan = colSpans[i] ?? 'sm:col-span-1';
+            return (
+              <FadeIn key={project.id} direction="up" delay={i * 100} className={`flex ${colSpan}`}>
+                <ProjectCard project={project} index={i} />
+              </FadeIn>
+            );
+          })}
+        </div>
+        <FadeIn direction="none" delay={50}>
+          <div className="mt-10 text-right">
+            <Tag name="projects" closing />
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ── Experience ───────────────────────────────────── */}
+      <section id="experience" className="relative py-16 md:py-20 px-4 sm:px-8 md:px-20 max-w-7xl mx-auto border-t border-white/5">
+        <SectionLabel tag="experience" />
+        <div className="space-y-8">
+          {experience.map((exp, i) => (
+            <FadeIn key={exp.id} direction="left" delay={i * 100}>
+              <ExperienceCard experience={exp} />
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn direction="none" delay={50}>
+          <div className="mt-10 text-right">
+            <Tag name="experience" closing />
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ── Footer ───────────────────────────────────────── */}
+      <footer className="relative py-10 px-8 border-t border-white/5 text-center">
+        <p className="text-gray-700 text-xs font-mono">
+          <span className="text-pink-500/40">&lt;imprint&gt;</span>
+          {" "}Isaac © 2026{" "}
+          <span className="text-pink-500/40">&lt;/imprint&gt;</span>
+        </p>
+      </footer>
+    </div>
+  );
 }
+

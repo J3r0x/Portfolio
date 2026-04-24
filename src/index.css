@@ -64,27 +64,15 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 7%;
 
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 0%;
 
-    --border: 214 32% 91%;
-  }
-
-  .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
-
-    --card: 222 47% 8%;
-
-    --primary: 250 65% 65%;
-    --primary-foreground: 213 31% 91%;
-
-    --border: 217 33% 20%;
+    --border: 0 0% 15%;
   }
 
   * {
@@ -93,10 +81,13 @@
 
   html {
     @apply scroll-smooth;
+    background-color: #0d0d0d;
+    color: #ffffff;
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    background-color: #0d0d0d;
+    color: #ffffff;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -140,7 +131,7 @@
 
 @utility cosmic-button {
   @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
-  transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
+  transition-all duration-300 hover:shadow-[0_0_10px_rgba(236,72,153,0.5)]
   hover:scale-105 active:scale-95;
 }
 
@@ -158,5 +149,65 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
+
+/* ── Dot grid background ─────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.25) 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+}
+
+/* ── Floating orb animations ─────────────────────────── */
+@keyframes orb-drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(45px, -35px); }
+}
+@keyframes orb-drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-35px, 28px); }
+}
+@keyframes orb-drift-c {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(22px, 32px); }
+  66%       { transform: translate(-18px, -12px); }
+}
+
+.orb-a { animation: orb-drift-a 14s ease-in-out infinite; }
+.orb-b { animation: orb-drift-b 19s ease-in-out infinite; }
+.orb-c { animation: orb-drift-c 24s ease-in-out infinite; }
+
+/* ── Geometric shape animations ──────────────────────── */
+@keyframes shape-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes shape-spin-rev {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes shape-float {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+@keyframes shape-float-b {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(10px) rotate(var(--r, 0deg)); }
+}
+@keyframes shape-pulse-ring {
+  0%, 100% { opacity: 0.5; r: 23; }
+  50%       { opacity: 1;   r: 26; }
+}
+@keyframes dash-march {
+  to { stroke-dashoffset: -100; }
+}
+
+.shape-spin-slow  { animation: shape-spin-slow 40s linear infinite; transform-origin: center; }
+.shape-spin-rev   { animation: shape-spin-rev  55s linear infinite; transform-origin: center; }
+.shape-float      { animation: shape-float  9s ease-in-out infinite; }
+.shape-float-b    { animation: shape-float-b 12s ease-in-out infinite; }
+.shape-dash-march { stroke-dasharray: 12 8; animation: dash-march 4s linear infinite; }

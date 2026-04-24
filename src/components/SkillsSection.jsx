@@ -1,55 +1,73 @@
-import { 
-  SiReact, 
-  SiJavascript, 
-  SiTypescript, 
-  SiHtml5, 
-  SiCss3, 
-  SiNodedotjs, 
-  SiGit 
+import {
+  SiReact,
+  SiJavascript,
+  SiTypescript,
+  SiHtml5,
+  SiCss3,
+  SiNodedotjs,
+  SiGit,
+  SiTailwindcss,
+  SiVite,
+  SiExpress,
+  SiMongodb,
+  SiElectron,
+  SiNextdotjs,
 } from 'react-icons/si';
 
-export const SkillItem = ({ skill }) => {
-  // Mapeo de iconos
-  const iconMap = {
-    SiReact,
-    SiJavascript,
-    SiTypescript,
-    SiHtml5,
-    SiCss3,
-    SiNodedotjs,
-    SiGit
-  };
-  
+const iconMap = {
+  SiReact,
+  SiJavascript,
+  SiTypescript,
+  SiHtml5,
+  SiCss3,
+  SiNodedotjs,
+  SiGit,
+  SiTailwindcss,
+  SiVite,
+  SiExpress,
+  SiMongodb,
+  SiElectron,
+  SiNextdotjs,
+};
+
+const TechBadge = ({ skill }) => {
   const IconComponent = iconMap[skill.icon];
-  
+
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 hover:bg-[#E91E63]/10 dark:hover:bg-slate-600/50 transition-colors duration-300">
-      <IconComponent className="text-2xl text-[#E91E63]" />
-      <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-        {skill.name}
-      </span>
+    <div
+      className={`flex items-center gap-2.5 px-4 py-2.5 border font-mono text-sm cursor-default select-none transition-all duration-200 ${
+        skill.featured
+          ? 'bg-pink-600/15 border-pink-500/35 text-pink-300 hover:bg-pink-600/25 hover:border-pink-500/60'
+          : 'bg-white/[0.03] border-white/[0.07] text-gray-500 hover:border-white/20 hover:text-gray-300'
+      }`}
+    >
+      {IconComponent && (
+        <IconComponent
+          className={`text-lg shrink-0 ${skill.featured ? 'text-pink-400' : 'text-gray-600'}`}
+        />
+      )}
+      <span>{skill.name}</span>
     </div>
   );
 };
 
 export const SkillsSection = ({ skills }) => {
   const categories = [
-    { key: 'frontend', title: 'Frontend', icon: '🎨' },
-    { key: 'backend', title: 'Backend', icon: '⚙️' },
-    { key: 'tools', title: 'Herramientas', icon: '🛠️' }
-  ];
+    { label: 'frontend', items: skills.frontend || [] },
+    { label: 'backend',  items: skills.backend  || [] },
+    { label: 'tools',    items: skills.tools    || [] },
+  ].filter(c => c.items.length > 0);
 
   return (
-    <div className="space-y-6">
-      {categories.map((category) => (
-        <div key={category.key}>
-          <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-[#E91E63] dark:text-[#E91E63]">
-            <span>{category.icon}</span>
-            {category.title}
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {skills[category.key]?.map((skill, index) => (
-              <SkillItem key={index} skill={skill} />
+    <div className="space-y-7">
+      {categories.map(({ label, items }) => (
+        <div key={label} className="flex gap-6 items-start">
+          <span className="shrink-0 text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] w-16 pt-2.5">
+            {label}
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {items.map((skill, i) => (
+              <TechBadge key={i} skill={skill} />
             ))}
           </div>
         </div>
