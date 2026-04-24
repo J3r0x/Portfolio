@@ -44,7 +44,7 @@ export const projects = [
     image: clutchlyImage,
     technologies: ["TypeScript", "Next.js", "Electron", "Tailwind CSS", "Riot API", "Framer Motion", "Zustand"],
     github: "https://github.com/J3r0x/tracker",
-    demo: null,
+    demo: "https://tracker-m1pooj18m-j3r0xs-projects.vercel.app/",
     featured: false,
     badge: "WIP",
   },
