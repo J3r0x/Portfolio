@@ -12,6 +12,11 @@ import {
   SiMongodb,
   SiElectron,
   SiNextdotjs,
+  SiNestjs,
+  SiPostgresql,
+  SiPrisma,
+  SiDocker,
+  SiPython,
 } from 'react-icons/si';
 
 const iconMap = {
@@ -28,6 +33,11 @@ const iconMap = {
   SiMongodb,
   SiElectron,
   SiNextdotjs,
+  SiNestjs,
+  SiPostgresql,
+  SiPrisma,
+  SiDocker,
+  SiPython,
 };
 
 const TechBadge = ({ skill }) => {

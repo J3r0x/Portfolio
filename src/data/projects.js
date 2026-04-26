@@ -95,23 +95,28 @@ export const experience = [
 
 export const skills = {
   frontend: [
-    { name: "React",      icon: "SiReact",      featured: true },
-    { name: "TypeScript", icon: "SiTypescript",  featured: true },
-    { name: "JavaScript", icon: "SiJavascript",  featured: true },
-    { name: "Next.js",    icon: "SiNextdotjs",   featured: false },
-    { name: "HTML",       icon: "SiHtml5",       featured: false },
-    { name: "CSS",        icon: "SiCss3",        featured: false },
+    { name: "React",       icon: "SiReact",       featured: true },
+    { name: "TypeScript",  icon: "SiTypescript",   featured: true },
+    { name: "JavaScript", icon: "SiJavascript",   featured: true },
+    { name: "Next.js",    icon: "SiNextdotjs",    featured: false },
+    { name: "HTML",       icon: "SiHtml5",        featured: false },
+    { name: "CSS",        icon: "SiCss3",         featured: false },
     { name: "Tailwind CSS", icon: "SiTailwindcss", featured: false },
-    { name: "Vite",       icon: "SiVite",        featured: false },
+    { name: "Vite",       icon: "SiVite",         featured: false },
   ],
   backend: [
-    { name: "Node.js",  icon: "SiNodedotjs", featured: true },
-    { name: "Express",  icon: "SiExpress",   featured: true },
-    { name: "MongoDB",  icon: "SiMongodb",   featured: true },
+    { name: "Node.js",    icon: "SiNodedotjs",   featured: true },
+    { name: "Express",    icon: "SiExpress",     featured: true },
+    { name: "NestJS",     icon: "SiNestjs",      featured: true },
+    { name: "MongoDB",    icon: "SiMongodb",     featured: true },
+    { name: "PostgreSQL", icon: "SiPostgresql",  featured: true },
+    { name: "Prisma",     icon: "SiPrisma",      featured: false },
+    { name: "Python",     icon: "SiPython",      featured: false },
   ],
   tools: [
-    { name: "Git",      icon: "SiGit",       featured: true },
-    { name: "Electron", icon: "SiElectron",  featured: false },
+    { name: "Git",        icon: "SiGit",         featured: true },
+    { name: "Docker",     icon: "SiDocker",      featured: true },
+    { name: "Electron",   icon: "SiElectron",    featured: false },
   ]
 };
 
