@@ -195,7 +195,7 @@ export const Home = () => {
         <SectionLabel tag="projects" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project, i) => {
-            const colSpans = ['sm:col-span-2 lg:col-span-2', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-2 lg:col-span-2', 'sm:col-span-2 lg:col-span-3'];
+            const colSpans = ['sm:col-span-2 lg:col-span-2', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-1 lg:col-span-1', 'sm:col-span-1 lg:col-span-1'];
             const colSpan = colSpans[i] ?? 'sm:col-span-1';
             return (
               <FadeIn key={project.id} direction="up" delay={i * 100} className={`flex ${colSpan}`}>

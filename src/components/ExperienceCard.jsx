@@ -37,8 +37,6 @@ export const ExperienceCard = ({ experience }) => {
             <p className="sm:hidden text-xs font-mono text-gray-500 mt-1">{experience.period}</p>
           </div>
 
-          <p className="text-base leading-relaxed text-gray-400 font-sans">{experience.description}</p>
-
           {/* Technologies */}
           <div className="flex flex-wrap gap-1.5 pt-1" aria-label="Technologies used">
             {experience.technologies.map((tech, index) => (
